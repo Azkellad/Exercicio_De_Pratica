@@ -1,0 +1,54 @@
+<h2>Cadastrar Produto</h2>
+<form [formGroup]="cadastroForm" (ngSubmit)="cadastrar()">
+  <label>
+    Produto:
+    <input formControlName="produto" type="text" />
+  </label>
+  @if (cadastroForm.get('produto')?.invalid && cadastroForm.get('produto')?.touched) {
+    <span class="erro">Nome do produto é obrigatório (máx. 50 caracteres).</span>
+  }
+
+  <label>
+    Descrição:
+    <input formControlName="descricao" type="text" />
+  </label>
+
+  <label>
+    Quantidade inicial:
+    <input formControlName="quantidade" type="number" min="0" />
+  </label>
+
+  <button type="submit" [disabled]="cadastroForm.invalid">Cadastrar</button>
+</form>
+
+<hr />
+
+<h2>Movimentar Estoque</h2>
+<form [formGroup]="estoqueForm" (ngSubmit)="movimentarEstoque()">
+  <label>
+    Id do produto (Guid):
+    <input formControlName="id" type="text" />
+  </label>
+
+  <label>
+    Quantidade:
+    <input formControlName="quantidade" type="number" min="1" />
+  </label>
+
+  <label>
+    Operação:
+    <select formControlName="operacao">
+      <option value="adicionar">Adicionar</option>
+      <option value="baixar">Baixar</option>
+    </select>
+  </label>
+
+  <button type="submit" [disabled]="estoqueForm.invalid">Confirmar</button>
+</form>
+
+@if (mensagem) {
+  <p class="sucesso">{{ mensagem }}</p>
+}
+@if (erro) {
+  <p class="erro">{{ erro }}</p>
+}

@@ -1,0 +1,54 @@
+<h2>Nova Nota</h2>
+<button (click)="criarNota()" [disabled]="notaAtual !== null && notaAtual.status === 'Aberta'">
+  Criar Nota
+</button>
+
+@if (notaAtual) {
+  <div>
+    <h3>Nota {{ notaAtual.n }} — Status: {{ notaAtual.status }}</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Produto Id</th>
+          <th>Quantidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of notaAtual.itens; track item.id) {
+          <tr>
+            <td>{{ item.prodId }}</td>
+            <td>{{ item.quantidade }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+    @if (notaAtual.status === 'Aberta') {
+      <form [formGroup]="itemForm" (ngSubmit)="adicionarItem()">
+        <label>
+          Id do Produto (Guid):
+          <input formControlName="prodId" type="text" />
+        </label>
+
+        <label>
+          Quantidade:
+          <input formControlName="quantidade" type="number" min="1" />
+        </label>
+
+        <button type="submit" [disabled]="itemForm.invalid">Adicionar Item</button>
+      </form>
+
+      <button (click)="fecharNota()" [disabled]="notaAtual.itens.length === 0">
+        Fechar Nota
+      </button>
+    }
+  </div>
+}
+
+@if (mensagem) {
+  <p class="sucesso">{{ mensagem }}</p>
+}
+@if (erro) {
+  <p class="erro">{{ erro }}</p>
+}

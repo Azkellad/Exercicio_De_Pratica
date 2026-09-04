@@ -1,0 +1,66 @@
+# Build and IDE files
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.tmp
+*.log
+
+# .NET publish output
+[Dd]ebug/
+[Rr]elease/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+TestResults/
+
+# Environment and secrets
+.env
+.env.*
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+secrets.json
+appsettings.Development.json
+appsettings.Local.json
+appsettings.Production.json
+!appsettings.json
+
+# Frontend environment files
+mercado-front/.env
+mercado-front/.env.*
+mercado-front/.env.local
+mercado-front/.env.development.local
+mercado-front/.env.production.local
+
+# Certificates and private keys
+*.pfx
+*.pem
+*.key
+*.crt
+*.cer
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+mercado.sqlite*
+
+# Frontend dependencies and generated files
+mercado-front/node_modules/
+mercado-front/dist/
+mercado-front/build/
+mercado-front/.next/
+mercado-front/.cache/
+mercado-front/coverage/
+
+# Operating system files
+Thumbs.db
+.DS_Store
