@@ -1,0 +1,117 @@
+.page-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    margin-top: 0.3rem;
+    font-size: 0.92rem;
+  }
+}
+
+.estado-info {
+  color: var(--ink-soft);
+  padding: 1.5rem 0;
+
+  &--erro {
+    color: var(--brick);
+  }
+}
+
+.produtos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.15rem;
+}
+
+.produto-card {
+  position: relative;
+  background: var(--paper-card);
+  border: 1px solid var(--paper-line);
+  padding: 1.35rem 1.2rem 1.1rem 1.6rem;
+  clip-path: polygon(22px 0, 100% 0, 100% 100%, 0 100%, 0 22px);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: box-shadow 0.15s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 1px solid var(--paper-line);
+  }
+
+  &:hover {
+    box-shadow: var(--shadow-pop);
+  }
+
+  &__head h3 {
+    font-size: 1.08rem;
+    line-height: 1.3;
+  }
+
+  &__desc {
+    font-size: 0.86rem;
+    min-height: 2.4em;
+  }
+
+  &__estoque {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  &__barra {
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--paper-line);
+    overflow: hidden;
+  }
+
+  &__barra-fill {
+    height: 100%;
+    background: var(--forest);
+    border-radius: 3px;
+
+    &.is-baixo {
+      background: var(--mustard-dark);
+    }
+
+    &.is-zerado {
+      background: var(--brick);
+    }
+  }
+
+  &__qtd {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  &__acoes {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.15rem;
+
+    .btn {
+      padding: 0.4rem 0.75rem;
+      font-size: 0.82rem;
+    }
+  }
+}

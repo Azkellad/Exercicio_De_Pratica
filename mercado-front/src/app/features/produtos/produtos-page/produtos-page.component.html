@@ -1,0 +1,59 @@
+<header class="page-head">
+  <div>
+    <h1>Produtos</h1>
+    <p>{{ produtos().length }} {{ produtos().length === 1 ? 'produto cadastrado' : 'produtos cadastrados' }}</p>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="abrirNovo()" [disabled]="formAberto()">
+    + Novo produto
+  </button>
+</header>
+
+@if (formAberto()) {
+  <app-produto-form [produto]="editando()" (salvar)="salvar($event)" (cancelar)="fecharForm()" />
+}
+
+@if (carregando()) {
+  <p class="estado-info">Carregando produtos...</p>
+} @else if (erro()) {
+  <p class="estado-info estado-info--erro">{{ erro() }}</p>
+} @else if (produtos().length === 0) {
+  <app-empty-state
+    titulo="Nenhum produto cadastrado"
+    subtitulo="Cadastre o primeiro item para começar a controlar o estoque do mercado."
+  >
+    <button type="button" class="btn btn-primary" (click)="abrirNovo()">+ Novo produto</button>
+  </app-empty-state>
+} @else {
+  <div class="produtos-grid">
+    @for (p of produtos(); track p.id) {
+      <article class="produto-card">
+        <div class="produto-card__head">
+          <h3>{{ p.produto }}</h3>
+        </div>
+        <p class="produto-card__desc">{{ p.descricao || 'Sem descrição cadastrada.' }}</p>
+        <div class="produto-card__estoque">
+          <div class="produto-card__barra">
+            <div
+              class="produto-card__barra-fill"
+              [class.is-baixo]="faixaEstoque(p.quantidade) === 'baixo'"
+              [class.is-zerado]="faixaEstoque(p.quantidade) === 'zerado'"
+              [style.width]="larguraBarra(p.quantidade)"
+            ></div>
+          </div>
+          <span class="produto-card__qtd">{{ p.quantidade }} un.</span>
+        </div>
+        <div class="produto-card__acoes">
+          <button type="button" class="btn btn-ghost" (click)="editar(p)">Editar</button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="remover(p)"
+            [disabled]="removendoId() === p.id"
+          >
+            Remover
+          </button>
+        </div>
+      </article>
+    }
+  </div>
+}

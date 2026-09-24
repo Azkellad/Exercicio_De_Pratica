@@ -1,0 +1,49 @@
+<header class="page-head">
+  <div>
+    <h1>Notas</h1>
+    <p>{{ notas().length }} {{ notas().length === 1 ? 'nota registrada' : 'notas registradas' }}</p>
+  </div>
+</header>
+
+@if (carregando()) {
+  <p class="estado-info">Carregando notas...</p>
+} @else if (erro()) {
+  <p class="estado-info estado-info--erro">{{ erro() }}</p>
+} @else if (notas().length === 0) {
+  <app-empty-state
+    titulo="Nenhuma nota gerada"
+    subtitulo="As notas aparecem aqui depois que uma compra for paga."
+  />
+} @else {
+  <div class="ledger">
+    @for (nota of notas(); track nota.n) {
+      <article class="nota-row" [class.is-fechada]="nota.status === 'Fechada'">
+        <button type="button" class="nota-row__cabecalho" (click)="toggle(nota.n)">
+          <span class="nota-row__numero">Nº {{ nota.n }}</span>
+          <span class="nota-row__badge" [class.is-fechada]="nota.status === 'Fechada'">
+            {{ nota.status }}
+          </span>
+          <span class="nota-row__itens">
+            {{ nota.itens.length }} {{ nota.itens.length === 1 ? 'item' : 'itens' }}
+          </span>
+          <svg
+            class="nota-row__seta"
+            [class.is-aberto]="expandidaN() === nota.n"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+
+        @if (expandidaN() === nota.n) {
+          <app-nota-detail
+            [nota]="nota"
+            [produtos]="produtos()"
+          />
+        }
+      </article>
+    }
+  </div>
+}

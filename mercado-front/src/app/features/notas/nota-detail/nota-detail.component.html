@@ -1,0 +1,15 @@
+<div class="detalhe">
+  @if (nota.itens.length === 0) {
+    <p class="detalhe__vazio">Nenhum item lançado nesta nota ainda.</p>
+  } @else {
+    <ul class="detalhe__itens">
+      @for (item of nota.itens; track item.id) {
+        <li>
+          <span class="detalhe__item-nome">{{ nomeProduto(item.prodId) }}</span>
+          <span class="detalhe__item-qtd">{{ item.quantidade }} un.</span>
+        </li>
+      }
+    </ul>
+  }
+  <p class="detalhe__fechada">Compra paga — nota finalizada.</p>
+</div>

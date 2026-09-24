@@ -1,0 +1,108 @@
+.compra-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.8fr) minmax(320px, 1.2fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.compra-form,
+.carrinho {
+  background: var(--surface, #fff);
+  border: 1px solid var(--line, #dfe5e1);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.compra-form__head,
+.carrinho__head {
+  margin-bottom: 1.25rem;
+}
+
+.compra-form h2,
+.carrinho h2 {
+  margin: 0.25rem 0 0;
+}
+
+.eyebrow {
+  color: var(--accent, #18794e);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+label {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+select,
+input {
+  width: 100%;
+  min-height: 2.7rem;
+  border: 1px solid var(--line, #dfe5e1);
+  border-radius: 6px;
+  padding: 0 0.7rem;
+  background: #fff;
+  color: inherit;
+}
+
+.carrinho__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.carrinho__head strong {
+  color: var(--accent, #18794e);
+}
+
+.carrinho__vazio {
+  color: var(--muted, #65716b);
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.carrinho__lista {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+}
+
+.carrinho__lista li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--line, #dfe5e1);
+  padding: 0.9rem 0;
+}
+
+.carrinho__lista li div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.carrinho__lista span {
+  color: var(--muted, #65716b);
+  font-size: 0.9rem;
+}
+
+.carrinho__remover {
+  align-self: center;
+  border: 0;
+  background: transparent;
+  color: #b34032;
+  cursor: pointer;
+}
+
+.carrinho__finalizar {
+  width: 100%;
+}
+
+@media (max-width: 760px) {
+  .compra-layout {
+    grid-template-columns: 1fr;
+  }
+}
