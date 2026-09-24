@@ -1,59 +1,45 @@
-# MercadoFront
+# Mercado — Front-end (Angular 18)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.22.
+Front-end standalone (sem NgModules) para a API `Mercado` (ASP.NET Minimal API + EF Core).
 
-## Development server
-
-To start a local development server, run:
+## Como rodar
 
 ```bash
-ng serve
+npm install
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+A aplicação sobe em `http://localhost:4200` e chama a API em `http://localhost:5145`
+(porta definida em `src/environments/environment.development.ts`, mesma usada no `Mercado.http`).
 
-## Code scaffolding
+## Sobre as rotas da API
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+O `Program.cs` enviado só expõe `MapProdutoRoutes()` e `MapNotaRoutes()` como extension methods —
+não veio o conteúdo dessas classes. Os serviços abaixo foram escritos assumindo rotas REST
+convencionais; ajuste os caminhos se as suas forem diferentes (estão comentados no topo de cada arquivo):
 
-```bash
-ng generate component component-name
+- `src/app/core/services/produto.service.ts` → `GET/POST/PUT/DELETE /produtos`
+- `src/app/core/services/nota.service.ts` → `GET/POST /notas`, `PUT /notas/{n}/fechar`,
+  `POST /notas/{n}/itens`, `DELETE /notas/{n}/itens/{itemId}`
+
+Os nomes dos campos (`produto`, `descricao`, `quantidade`, `n`, `status`, `prodId`, `notaId`)
+seguem o schema real do `mercado.sqlite` enviado, em camelCase (padrão do `System.Text.Json`
+no ASP.NET Core).
+
+## Estrutura
+
+```
+src/app/
+├── core/            # models + services (HTTP, estado com Angular signals)
+├── features/
+│   ├── produtos/    # listagem em cards + formulário de cadastro/edição
+│   └── notas/       # ledger de notas + detalhe expansível (itens, fechar nota)
+└── shared/          # empty-state e toast reutilizáveis
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Design
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Identidade visual de "caderno de feira": verde-mato como cor estrutural (navegação e ledger),
+mostarda como único acento de ação, tijolo reservado para alertas/fechamento. Cards de produto
+têm corte diagonal + furo, lembrando etiqueta de preço; notas aparecem como um livro-caixa com
+linhas expansíveis. Totalmente responsivo: barra lateral vira navegação inferior abaixo de 780px.

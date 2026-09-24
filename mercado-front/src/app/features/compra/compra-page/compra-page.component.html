@@ -1,0 +1,78 @@
+<header class="page-head">
+  <div>
+    <h1>Compra</h1>
+    <p>Monte o carrinho e finalize o pagamento para gerar a nota.</p>
+  </div>
+</header>
+
+@if (carregando()) {
+  <p class="estado-info">Carregando produtos...</p>
+} @else {
+  <section class="compra-layout">
+    <div class="compra-form">
+      <div class="compra-form__head">
+        <span class="eyebrow">Nova compra</span>
+        <h2>Adicionar produtos</h2>
+      </div>
+
+      @if (produtos().length === 0) {
+        <p class="estado-info">Cadastre produtos antes de iniciar uma compra.</p>
+      } @else {
+        <label>
+          Produto
+          <select [ngModel]="produtoSelecionado()" (ngModelChange)="produtoSelecionado.set($event)">
+            <option value="">Selecione um produto</option>
+            @for (produto of produtos(); track produto.id) {
+              <option [value]="produto.id" [disabled]="produto.quantidade === 0">
+                {{ produto.produto }} · {{ produto.quantidade }} un. disponíveis
+              </option>
+            }
+          </select>
+        </label>
+        <label>
+          Quantidade
+          <input
+            type="number"
+            min="1"
+            [ngModel]="quantidade()"
+            (ngModelChange)="quantidade.set(+$event)"
+          />
+        </label>
+        <button type="button" class="btn btn-ghost" (click)="adicionar()" [disabled]="!produtoAtual()">
+          + Adicionar ao carrinho
+        </button>
+      }
+    </div>
+
+    <div class="carrinho">
+      <div class="carrinho__head">
+        <div>
+          <span class="eyebrow">Pedido atual</span>
+          <h2>Carrinho</h2>
+        </div>
+        <strong>{{ totalItens() }} un.</strong>
+      </div>
+
+      @if (carrinho().length === 0) {
+        <p class="carrinho__vazio">Nenhum produto adicionado ainda.</p>
+      } @else {
+        <ul class="carrinho__lista">
+          @for (item of carrinho(); track item.prodId) {
+            <li>
+              <div>
+                <strong>{{ item.produto.produto }}</strong>
+                <span>{{ item.quantidade }} unidade(s)</span>
+              </div>
+              <button type="button" class="carrinho__remover" (click)="remover(item.prodId)" aria-label="Remover produto">
+                Remover
+              </button>
+            </li>
+          }
+        </ul>
+        <button type="button" class="btn btn-primary carrinho__finalizar" (click)="finalizar()" [disabled]="finalizando()">
+          {{ finalizando() ? 'Processando pagamento...' : 'Pagar e gerar nota' }}
+        </button>
+      }
+    </div>
+  </section>
+}

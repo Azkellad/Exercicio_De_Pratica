@@ -30,6 +30,19 @@ public class ProdutoModel
         Produto = novoProduto;
     }
 
+    public void AtualizarProduto(string novoProduto, string novaDescricao, int novaQuantidade)
+    {
+        if (string.IsNullOrWhiteSpace(novoProduto))
+            throw new ArgumentException("Produto é obrigatório", nameof(novoProduto));
+
+        if (novaQuantidade < 0)
+            throw new ArgumentException("Quantidade não pode ser negativa", nameof(novaQuantidade));
+
+        Produto = novoProduto;
+        Descricao = novaDescricao;
+        Quantidade = novaQuantidade;
+    }
+
     public void AdicionarEstoque(int quantidade)
     {
         if (quantidade <= 0)

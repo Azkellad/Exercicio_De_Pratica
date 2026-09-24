@@ -1,0 +1,155 @@
+/* ============================================================
+   MERCADO — sistema de estilos globais
+   Linguagem visual: caderno de feira / etiquetas de preço.
+   Verde-mato como cor estrutural, mostarda como único acento
+   de ação, tijolo reservado para alerta/fechado.
+   ============================================================ */
+
+:root {
+  --ink: #1b1b16;
+  --ink-soft: #55534a;
+  --ink-faint: #8b8878;
+
+  --paper: #f2ede0;
+  --paper-card: #fffdf7;
+  --paper-line: #ddd2b4;
+
+  --forest: #234b3d;
+  --forest-dark: #16332a;
+  --forest-tint: #e3ebe5;
+
+  --mustard: #e3a72e;
+  --mustard-dark: #a97418;
+  --mustard-tint: #faedcf;
+
+  --brick: #a8432f;
+  --brick-tint: #f3e0da;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 10px;
+
+  --shadow-card: 0 1px 2px rgba(27, 27, 22, 0.07), 0 6px 16px rgba(27, 27, 22, 0.06);
+  --shadow-pop: 0 12px 30px rgba(22, 51, 42, 0.18);
+
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  color: var(--forest-dark);
+  margin: 0;
+  line-height: 1.15;
+}
+
+p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+input,
+select {
+  font-family: var(--font-body);
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--mustard-tint);
+  color: var(--forest-dark);
+}
+
+/* foco visível — acessibilidade, nunca removido */
+:focus-visible {
+  outline: 2px solid var(--mustard-dark);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 1.1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: transform 0.12s ease, background-color 0.15s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--mustard);
+  color: var(--forest-dark);
+}
+
+.btn-primary:hover {
+  background: var(--mustard-dark);
+  color: var(--paper-card);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--forest-dark);
+  border: 1px solid var(--paper-line);
+}
+
+.btn-ghost:hover {
+  border-color: var(--forest);
+  background: var(--forest-tint);
+}
+
+.btn-danger {
+  background: transparent;
+  color: var(--brick);
+}
+
+.btn-danger:hover {
+  background: var(--brick-tint);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

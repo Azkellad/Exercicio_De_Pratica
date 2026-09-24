@@ -25,6 +25,16 @@ public static class ProdutoRoutes
             return Results.Created($"/produtos/{produto.Id}", produto);
         });
 
+        group.MapPut("/{id:Guid}", async (Guid id, ProdutoUpdateRequest request, AppDbContext db) =>
+        {
+            var produto = await db.Produtos.FindAsync(id);
+            if (produto is null) return Results.NotFound();
+
+            produto.AtualizarProduto(request.Produto, request.Descricao, request.Quantidade);
+            await db.SaveChangesAsync();
+            return Results.Ok(produto);
+        });
+
         group.MapPut("/{id:Guid}/estoque", async (Guid id, int quantidade, string operacao, AppDbContext db) =>
         {
             var produto = await db.Produtos.FindAsync(id);
@@ -41,3 +51,5 @@ public static class ProdutoRoutes
         return app;
     }
 }
+
+public sealed record ProdutoUpdateRequest(string Produto, int Quantidade, string Descricao);

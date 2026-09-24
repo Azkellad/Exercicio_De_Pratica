@@ -1,0 +1,8 @@
+<div class="toast-stack" role="status" aria-live="polite">
+  @for (msg of toast.mensagens(); track msg.id) {
+    <div class="toast" [class.toast--erro]="msg.tipo === 'erro'">
+      <span>{{ msg.texto }}</span>
+      <button type="button" class="toast__fechar" (click)="toast.dispensar(msg.id)" aria-label="Fechar aviso">×</button>
+    </div>
+  }
+</div>

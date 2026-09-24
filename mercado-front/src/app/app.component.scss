@@ -1,0 +1,173 @@
+:host {
+  display: block;
+}
+
+.shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 232px 1fr;
+}
+
+/* ---------- trilho lateral (assinatura da barraca de feira) ---------- */
+
+.rail {
+  background: linear-gradient(180deg, var(--forest-dark), var(--forest) 130%);
+  color: var(--paper-card);
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem 1.25rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.rail-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+
+  &__mark {
+    width: 26px;
+    height: 26px;
+    color: var(--mustard);
+    flex-shrink: 0;
+  }
+
+  &__word {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+}
+
+.rail-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.7rem 0.75rem;
+    border-left: 3px solid transparent;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    color: rgba(243, 239, 228, 0.72);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    opacity: 0;
+    transform: translateX(-6px);
+    animation: rail-slide-in 0.45s ease forwards;
+
+    svg {
+      width: 19px;
+      height: 19px;
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      background: rgba(243, 239, 228, 0.06);
+      color: var(--paper-card);
+    }
+
+    &.is-active {
+      background: rgba(243, 239, 228, 0.08);
+      border-left-color: var(--mustard);
+      color: var(--paper-card);
+      font-weight: 600;
+    }
+  }
+
+  &__item:nth-child(1) {
+    animation-delay: 0.05s;
+  }
+  &__item:nth-child(2) {
+    animation-delay: 0.14s;
+  }
+}
+
+@keyframes rail-slide-in {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.rail-foot {
+  margin-top: auto;
+  font-size: 0.8rem;
+  color: rgba(243, 239, 228, 0.5);
+}
+
+/* ---------- palco principal ---------- */
+
+.stage {
+  min-width: 0;
+  padding: 2.5rem 3rem 3rem;
+}
+
+/* ---------- navegação inferior (mobile) ---------- */
+
+.tabbar {
+  display: none;
+}
+
+@media (max-width: 780px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .rail {
+    display: none;
+  }
+
+  .stage {
+    padding: 1.5rem 1.1rem 5.5rem;
+  }
+
+  .tabbar {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--forest-dark);
+    border-top: 1px solid rgba(243, 239, 228, 0.1);
+    padding: 0.5rem 0.75rem calc(0.5rem + env(safe-area-inset-bottom, 0px));
+    z-index: 20;
+
+    &__item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      text-decoration: none;
+      color: rgba(243, 239, 228, 0.6);
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 0.35rem 0;
+      border-radius: var(--radius-sm);
+
+      svg {
+        width: 21px;
+        height: 21px;
+      }
+
+      &.is-active {
+        color: var(--mustard);
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail-nav__item {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

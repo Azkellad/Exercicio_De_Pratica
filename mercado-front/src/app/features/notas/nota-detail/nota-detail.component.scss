@@ -1,0 +1,89 @@
+.detalhe {
+  padding: 1rem 1.4rem 1.4rem 2.1rem;
+  border-top: 1px dashed var(--paper-line);
+  background: var(--paper-card);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__vazio,
+  &__fechada {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+  }
+
+  &__itens {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      padding: 0.35rem 0;
+      border-bottom: 1px solid var(--paper-line);
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &__item-nome {
+    flex: 1;
+  }
+
+  &__item-qtd {
+    font-weight: 600;
+    color: var(--forest-dark);
+    white-space: nowrap;
+  }
+
+  &__remover {
+    background: none;
+    border: none;
+    color: var(--brick);
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 0 0.2rem;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+
+    select,
+    input {
+      border: 1px solid var(--paper-line);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 0.6rem;
+      font-size: 0.88rem;
+      background: #fff;
+    }
+
+    select {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    input {
+      width: 80px;
+    }
+  }
+
+  &__rodape {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
